@@ -1,26 +1,16 @@
 package Models
 
-import javafx.util.converter.BigDecimalStringConverter
-
-//import com.gaps.medharbour.repositories.mongo.BigDecimalConverter
-//import com.gaps.medharbour.repositories.mongo.BigDecimalConverter
-//import com.gaps.medharbour.repositories.mongo.BigDecimalConverter
-import com.google.inject.spi.TypeConverter
 import com.mongodb.{MongoClientURI, MongoClient}
 import org.mongodb.morphia.mapping.MapperOptions
 import org.mongodb.morphia.{Datastore, Morphia}
 import play.api.Play
 import play.api.Play.current
-/**
- * Created by tima on 9/4/16.
- */
+
 object MorphStore {
 
   private val _mongoClient = new MongoClient(new MongoClientURI(Play.configuration.getString("mongo.url").getOrElse("")))
 
 val morphia : Morphia = new Morphia()
-//  morphia.mapPackage("asfd")
-//  morphia.mapPackage("Teacher")
 
   val mapper = morphia.getMapper.getOptions
 

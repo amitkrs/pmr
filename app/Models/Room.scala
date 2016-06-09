@@ -5,9 +5,6 @@ import java.util
 import org.bson.types.ObjectId
 import org.mongodb.morphia.annotations.{Entity, Id}
 
-/**
-  * Created by gautam on 9/6/16.
-  */
 
 @Entity("Rooms")
 case class Room(name:String,number:Int,cost:BigDecimal){
