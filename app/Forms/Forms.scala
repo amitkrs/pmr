@@ -8,9 +8,6 @@ import play.api.data._
 import play.api.data.Forms._
 import scala.collection.JavaConversions._
 
-/**
-  * Created by gautam on 9/6/16.
-  */
 object Forms {
 
   case class RoomFull(name:String,number:Int,cost:BigDecimal,items:Option[String]){
