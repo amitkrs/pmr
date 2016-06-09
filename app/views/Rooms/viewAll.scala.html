@@ -5,6 +5,8 @@
 
 @main("All Rooms"){
     <div class="container">
+        <h3 class="text-center">Total Rooms</h3>
+        <hr/>
         <div class="row content" id="table-content">
             <div class="col-md-12">
             <input type="hidden" id="current-page" value="@request.getQueryString("page").getOrElse(1)">

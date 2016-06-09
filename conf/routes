@@ -9,8 +9,6 @@ GET         /index               @controllers.Application.index
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        @controllers.Assets.versioned(path="/public", file: Asset)
 
-
-GET         /saveRoom            @controllers.RoomController.saveRoom
 GET         /getRooms            @controllers.RoomController.getRooms(page:Int?=1)
 GET         /deleteRooms/:id         @controllers.RoomController.deleteRoom(id)
 
