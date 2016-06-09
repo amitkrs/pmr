@@ -3,8 +3,8 @@ package Repositories
 import Models.{Room, MorphStore}
 import org.bson.types.ObjectId
 
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
+//import scala.concurrent.Future
+//import scala.concurrent.ExecutionContext.Implicits.global
 import scala.collection.JavaConversions._
 
 
@@ -20,7 +20,7 @@ class RoomRepository {
 
   }
 
-  def getRooms(page:Int) = Future{
+  def getRooms(page:Int) = {
     createQuery.offset((page-1)*4).limit(4).toList
   }
 
