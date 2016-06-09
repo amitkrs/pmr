@@ -3,9 +3,7 @@ package controllers
 import Models.{Room, MorphStore}
 import Services.RoomService
 import com.google.inject.Inject
-import org.bson.types.ObjectId
 import play.api.mvc.{Action, Controller}
-import scala.collection.JavaConversions._
 import scala.concurrent.ExecutionContext.Implicits.global
 
 class RoomController @Inject()(roomService:RoomService) extends Controller{
