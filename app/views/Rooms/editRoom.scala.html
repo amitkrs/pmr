@@ -4,6 +4,7 @@
 
 @main(room.map(room => s"Edit ${room.name}").getOrElse("NO Room Found")){
     @if(room.nonEmpty){
+        <h3 class="text-center">Edit Room</h3>
     <form method="post" action="@routes.RoomController.postRoom(room.map(_.id.toString).getOrElse(""))">
         <div class="form-group">
     <label for="room-name">Hotel Name</label>

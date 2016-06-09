@@ -16,11 +16,12 @@ object Forms {
       this.items match {
         case Some(x) =>var arr = new util.ArrayList[String]()
           arr.appendAll(x.split(",").map(_.trim))
-          Logger.info(arr.toString)
+//          Logger.info(arr.toString)
           room.items = arr
-          Logger.info(room.items.toString)
+//          Logger.info(room.items.toString)
+        case _ => 
       }
-      Logger.info(room.toString)
+//      Logger.info(room.toString)
       room
     }
   }

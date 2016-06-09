@@ -4,47 +4,29 @@ import Models.{Room, MorphStore}
 import Services.RoomService
 import com.google.inject.Inject
 import play.api.mvc.{Action, Controller}
-//import scala.concurrent.ExecutionContext.Implicits.global
 
-class RoomController @Inject()(roomService:RoomService) extends Controller{
+import scala.concurrent.ExecutionContext.Implicits.global
+
+class RoomController @Inject()(roomService: RoomService) extends Controller {
 
   val ins = MorphStore.getInstance
 
-//  val query = ins.createQuery[Room](classOf[Room])
-
-  def saveRoom = Action{
+  def getRooms(page: Int) = Action.async{
     implicit request =>
-    val name= request.getQueryString("name").getOrElse("default")
-      val num = request.getQueryString("num").map(_.toInt).getOrElse(0)
-    val cost = request.getQueryString("cost").map(BigDecimal(_)).getOrElse(BigDecimal(1000))
-      val room = Room(name,num,cost)
-
-      roomService.saveRoom(room)
-
-//      ins.save[Room](room)
-
-      Ok("saved")
+      val results = roomService.getRooms(page)
+      results.map(rooms =>
+      Ok(views.html.Rooms.viewAll(rooms)))
   }
 
-  def getRooms(page:Int) = Action{
-implicit request =>
-    val results = roomService.getRooms(page)
+  def deleteRoom(id: String) = Action {
 
-//    val results = ins.createQuery[Room](classOf[Room]).asList()
-  Ok(views.html.Rooms.viewAll(results))
-  }
-
-  def deleteRoom(id:String) = Action{
-
-//    ins.delete[Room](ins.createQuery[Room](classOf[Room]).field("id").equal(new ObjectId(id)))
 
     roomService.deleteRoom(id)
 
     Redirect("/getRooms")
   }
 
-  def getRoom(id:String) = Action{
-//   val query = ins.createQuery[Room](classOf[Room]).field("id").equal(new ObjectId(id))
+  def getRoom(id: String) = Action {
 
     val room = roomService.getEditRoom(id)
 
@@ -52,36 +34,31 @@ implicit request =>
   }
 
 
-  def postRoom(id:String)=Action{
+  def postRoom(id: String) = Action {
     implicit request =>
-    val room = Forms.Forms.editForm.bindFromRequest.get
+      val room = Forms.Forms.editForm.bindFromRequest.get
 
       val newRoom = room.getRoom
-//     val room = ins.createQuery[Room](classOf[Room]).field("id").equal(new ObjectId(id)).get()
 
-//      ins.update[Room](room,ins.createUpdateOperations[Room](classOf[Room]).set("name",newRoom.name).set("number",newRoom.number))
-
-      roomService.postEditRoom(id,newRoom)
+      roomService.postEditRoom(id, newRoom)
 
       Redirect("/getRooms")
   }
 
-  def getAddRoom =Action{
+  def getAddRoom = Action {
     Ok(views.html.Rooms.addRoom())
   }
 
-  def postAddRoom = Action{
+  def postAddRoom = Action {
     implicit request =>
 
-    val room = Forms.Forms.editForm.bindFromRequest.get
+      val room = Forms.Forms.editForm.bindFromRequest.get
 
       val newRoom = room.getRoom
 
       roomService.addRoom(newRoom)
 
-//    ins.save[Room](newRoom)
-
-    Redirect("/getRooms")
+      Redirect("/getRooms")
 
   }
 }
