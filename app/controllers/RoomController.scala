@@ -4,7 +4,7 @@ import Models.{Room, MorphStore}
 import Services.RoomService
 import com.google.inject.Inject
 import play.api.mvc.{Action, Controller}
-import scala.concurrent.ExecutionContext.Implicits.global
+//import scala.concurrent.ExecutionContext.Implicits.global
 
 class RoomController @Inject()(roomService:RoomService) extends Controller{
 
@@ -26,14 +26,12 @@ class RoomController @Inject()(roomService:RoomService) extends Controller{
       Ok("saved")
   }
 
-  def getRooms(page:Int) = Action.async{
+  def getRooms(page:Int) = Action{
 implicit request =>
     val results = roomService.getRooms(page)
 
 //    val results = ins.createQuery[Room](classOf[Room]).asList()
-
-  results.map(rooms =>
-  Ok(views.html.Rooms.viewAll(rooms)))
+  Ok(views.html.Rooms.viewAll(results))
   }
 
   def deleteRoom(id:String) = Action{
