@@ -1,0 +1,21 @@
+@main("Add room"){
+    <form method="post" action="@routes.RoomController.postAddRoom()">
+        <div class="form-group">
+    <label for="room-name-add">Name</label>
+    <input type="text" name="name" id="room-name-add" class="form-control" required>
+        </div>
+        <div class="form-group">
+    <label for="room-number-add">Number</label>
+    <input type="number" name="number" id="room-number-add" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="room-cost-add">Cost</label>
+            <input type="number" name="cost" id="room-cost-add" class="form-control" step="0.2" required>
+        </div>
+        <div class="form-group">
+            <label for="room-items-add">Items(Enter Comma separated values)</label>
+            <input type="text" name="items" id="room-items-add" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+}

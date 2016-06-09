@@ -1,0 +1,31 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /index               @controllers.Application.index
+#GET         /submitFile          @controllers.Application.submitFile
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file        @controllers.Assets.versioned(path="/public", file: Asset)
+
+#new
+#GET         /first               @controllers.Application.firstPage
+#GET         /second              @controllers.Application.second(x:Option[String]?=None)
+#POST        /parseFile           @controllers.Application.parseWork
+#
+#GET         /getForm             @controllers.Application.getForm
+#POST        /postForm            @controllers.Application.postForm
+
+GET         /saveStudent         @controllers.Application.saveStudent
+
+
+GET         /saveRoom            @controllers.RoomController.saveRoom
+GET         /getRooms            @controllers.RoomController.getRooms(page:Int?=1)
+GET         /deleteRooms/:id         @controllers.RoomController.deleteRoom(id)
+
+GET         /editRoom/:id        @controllers.RoomController.getRoom(id)
+POST         /editRoom/:id        @controllers.RoomController.postRoom(id)
+
+GET          /addRoom            @controllers.RoomController.getAddRoom
+POST        /addRoom             @controllers.RoomController.postAddRoom

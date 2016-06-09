@@ -1,0 +1,57 @@
+@import Models.Room
+
+@import util.Helper
+@(rooms:List[Room])(implicit request:RequestHeader)
+
+@main("All Rooms"){
+    <div class="container">
+        <div class="row content" id="table-content">
+            <div class="col-md-12">
+            <input type="hidden" id="current-page" value="@request.getQueryString("page").getOrElse(1)">
+        @if(rooms.nonEmpty){
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Hotel Name</th>
+                    <th>Room Number</th>
+                    <th>Room Cost</th>
+                    <th>Accessories</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+                <tbody>
+                    @for(room<-rooms){
+                        <tr>
+                            <td>@room.name</td>
+                            <td>@room.number</td>
+                            <td>Rs. @room.cost</td>
+                            <td>@room.items.mkString(", ")</td>
+                            <td><a href="@routes.RoomController.getRoom(room.id.toString)">Edit</a></td>
+                            <td><a href="@routes.RoomController.deleteRoom(room.id.toString)">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }else{
+            <h3>No Rooms Found </h3>
+        }
+            </div>
+        </div>
+
+        <div class="row paged">
+            <div class="col-md-2">
+                <button class="btn btn-default" id="previous" >Previous</button>
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2 pull-right">
+                <button class="btn btn-default pull-right" id="next" @Helper.ifTrue(rooms.length<4,"disabled","")>Next</button>
+            </div>
+        </div>
+
+        <hr>
+        <p style="text-align:center;">
+            To add a room click <a href="@routes.RoomController.getAddRoom()">here</a>
+        </p>
+    </div>
+}
